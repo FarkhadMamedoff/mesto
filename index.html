@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="page">
+  <header class="header">
+    <div class="header__logo"></div>
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img src="./images/profile-avatar.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
+      <div class="profile__info">
+        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <button type="button" class="profile__button profile__button_type_edit"></button>
+        <p class="profile__subtitle">Исследователь океана</p>
+      </div>
+      <button type="button" class="profile__button profile__button_type_add"></button>
+    </section>
+    <section class="elements">
+      <div class="element">
+        <img src="./images/images-kharachaevsk.jpg" alt="Заброшенный замок на зеленом холме, на фоне горы, много зелени"
+          class="element__image">
+        <div class="element__container">
+          <h2 class="element__title">Карачаево-Черкессия</h2>
+          <button type="button" class="element__like-icon"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/images-elbrus.jpg" alt="Рассвет, на заднем плане силует горы" class="element__image">
+        <div class="element__container">
+          <h2 class="element__title">Гора Эльбрус</h2>
+          <button type="button" class="element__like-icon"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/images-dombai.jpg" alt="Лес на фоне заснеженной вершине горы, серый тон"
+          class="element__image">
+        <div class="element__container">
+          <h2 class="element__title">Домбай</h2>
+          <button type="button" class="element__like-icon"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/images-sochi.jpg" alt="Лес на холме в тумане, вид сверху" class="element__image">
+        <div class="element__container">
+          <h2 class="element__title">Сочи</h2>
+          <button type="button" class="element__like-icon"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/images-altai.jpg" alt="Ноутбук на фоне леса. Фон размыт" class="element__image">
+        <div class="element__container">
+          <h2 class="element__title">Алтай</h2>
+          <button type="button" class="element__like-icon"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/images-karelia.jpg" alt="Река, по берегам лес" class="element__image">
+        <div class="element__container">
+          <h2 class="element__title">Карелия</h2>
+          <button type="button" class="element__like-icon"></button>
+        </div>
+      </div>
+    </section>
+    <section class="popup">
+      <div class="popup__container">
+        <div class="popup__block">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input type="text" placeholder="ФИО" class="popup__input popup__input_type_name">
+          <input type="text" placeholder="Род деятельности" class="popup__input popup__input_type_profession">
+          <button type="button" class="popup__button popup__button_type_submit">Сохранить</button>
+          <button type="button" class="popup__button popup__button_type_close"></button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2022. Mesto Russia</p>
+  </footer>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
