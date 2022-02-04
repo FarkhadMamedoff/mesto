@@ -29,4 +29,4 @@ ___
 - Продвинутая разработка скриптов на JavaScript.
 
 
-[Ссылка проекта на GitHub]()
+[Ссылка проекта на GitHub](https://farkhadmamedoff.github.io/mesto/)
