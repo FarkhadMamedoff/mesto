@@ -33,4 +33,5 @@ profileEditButton.addEventListener('click', getProfileInfo);
 popupCloseButton.addEventListener('click', () => {
         popup.classList.remove('popup_is-opened');
 });
-popupSubmitButton.addEventListener('click', setNewProfileInfo)
+
+popupSubmitButton.addEventListener('click', setNewProfileInfo);
