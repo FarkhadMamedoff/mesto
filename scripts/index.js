@@ -1,17 +1,17 @@
-let profileEditButton = document.querySelector('.profile__button_type_edit');
-let popupCloseButton = document.querySelector('.popup__button_type_close');
-let popupSubmitButton = document.querySelector('.popup__button_type_submit');
+const profileEditButton = document.querySelector('.profile__button_type_edit');
+const popupCloseButton = document.querySelector('.popup__button_type_close');
+const popupForm = document.querySelector('.popup__block');
 
-let profileName = document.querySelector('.profile__title');
-let profileProfession = document.querySelector('.profile__subtitle');
+const profileName = document.querySelector('.profile__title');
+const profileProfession = document.querySelector('.profile__subtitle');
 
-let popupName = document.querySelector('.popup__input_type_name');
-let popupProfession = document.querySelector('.popup__input_type_profession');
+const popupName = document.querySelector('.popup__input_type_name');
+const popupProfession = document.querySelector('.popup__input_type_profession');
 
-let popup = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
 
 
-function getProfileInfo() {
+function openProfilePopup() {
   popupName.value = profileName.textContent;
   popupProfession.value = profileProfession.textContent;
 
@@ -25,13 +25,15 @@ function setNewProfileInfo(evt) {
   profileName.textContent = popupName.value;
   profileProfession.textContent = popupProfession.value;
 
-  popup.classList.remove('popup_is-opened');
+  closeProfilePopup();
 }
 
 
-profileEditButton.addEventListener('click', getProfileInfo);
-popupCloseButton.addEventListener('click', () => {
-        popup.classList.remove('popup_is-opened');
-});
+function closeProfilePopup() {
+  popup.classList.remove('popup_is-opened');
+}
 
-popupSubmitButton.addEventListener('click', setNewProfileInfo);
+profileEditButton.addEventListener('click', openProfilePopup);
+popupCloseButton.addEventListener('click', closeProfilePopup);
+
+popupForm.addEventListener('submit', setNewProfileInfo);
