@@ -27,39 +27,33 @@ const popupTypeOpenImageTitle = popupTypeOpenImage.querySelector('.image-contain
 const initialCards = [
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-    alt: 'Скалистая местность. Вид сверху. На фоне много зелени.'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
     name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-    alt: 'Река, по берегам заснеженный лес.'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
     name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-    alt: 'Фото многоэтажки, серые тона. В некоторых окнах горит свет. Вид сверху. На заднем фоне такие же многоэтажки.'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
     name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-    alt: 'Поле на фоне горы'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
     name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-    alt: 'Железная дорога, вокруг лес. Вид сверху.'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-    alt: 'Зимний скалистый берег, вид сверху.'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
 function createElement(nameValue, urlValue, altValue = nameValue) {
 
-  const element = elementTemplate.querySelector('.element').cloneNode(true);
+  const element = elementTemplate.cloneNode(true);
 
   element.querySelector('.element__title').textContent = nameValue;
   element.querySelector('.element__image').src = urlValue;
@@ -80,7 +74,7 @@ function createElement(nameValue, urlValue, altValue = nameValue) {
   return element;
 }
 
-function setPopupToOpened(popupElement) {
+function openPopup(popupElement) {
   popupElement.classList.add('popup_is-opened');
 }
 function closePopup(popupElement) {
@@ -91,7 +85,7 @@ function openProfilePopup() {
   popupName.value = profileName.textContent;
   popupProfession.value = profileProfession.textContent;
 
-  setPopupToOpened(popup);
+  openPopup(popup);
 }
 
 function openImagePopup(title, url, alt)
@@ -100,7 +94,7 @@ function openImagePopup(title, url, alt)
   popupTypeOpenImageMainImage.alt = alt;
   popupTypeOpenImageTitle.textContent  = title;
 
-  setPopupToOpened(popupTypeOpenImage);
+  openPopup(popupTypeOpenImage);
 }
 
 function setNewProfileInfo(evt) {
@@ -122,7 +116,7 @@ function addNewElement(evt) {
 }
 
 initialCards.forEach((item) => {
-  const elem = createElement(item.name, item.link, item.alt);
+  const elem = createElement(item.name, item.link);
   elements.append(elem);
 });
 
@@ -137,10 +131,9 @@ popupTypeOpenImageCloseButton.addEventListener('click', function () {
 
 
 profileAddButton.addEventListener('click', function () {
-  popupTypeAddElementName.value = '';
-  popupTypeAddElementUrl.value = '';
+  popupTypeAddElementForm.reset();
 
-  setPopupToOpened(popupTypeAddElement);
+  openPopup(popupTypeAddElement);
 });
 popupTypeAddElementCloseButton.addEventListener('click', function () {
   closePopup(popupTypeAddElement);

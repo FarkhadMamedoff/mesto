@@ -7,7 +7,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url(button-close.svg);
+  background-image: url(../../../../images/button-close.svg);
 }
 
 @media screen and (max-width: 500px) {

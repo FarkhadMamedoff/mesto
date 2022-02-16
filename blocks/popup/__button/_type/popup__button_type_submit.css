@@ -13,6 +13,10 @@
 }
 
 
+.popup__button_type_submit:hover {
+  opacity: 0.8;
+}
+
 @media screen and (max-width: 500px) {
   .popup__button_type_submit {
     margin-top: 45px;
