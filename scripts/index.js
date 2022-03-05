@@ -77,7 +77,9 @@ function createElement(nameValue, urlValue, altValue = nameValue) {
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closePopupByEsc);
 }
+
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_is-opened');
 }
@@ -136,6 +138,19 @@ function closePopupByOverlay(evt) {
   }
 }
 
+function closePopupByEsc(evt)
+{
+  if (evt.key === 'Escape') {
+    const popupToClose = evt.currentTarget.querySelector('.popup_is-opened');
+    if (popupToClose !== null) {
+      hideErrorElementsIfVisible(popupToClose);
+      closePopup(popupToClose);
+      document.removeEventListener('keydown', closePopupByEsc);
+    }
+  }
+}
+
+
 initialCards.forEach((item) => {
   const elem = createElement(item.name, item.link);
   elements.append(elem);
@@ -152,15 +167,6 @@ popupTypeOpenImageCloseButton.addEventListener('click', function () {
   closePopup(popupTypeOpenImage);
 });
 
-document.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape') {
-    const popupToClose = evt.currentTarget.querySelector('.popup_is-opened');
-    if (popupToClose !== null) {
-      hideErrorElementsIfVisible(popupToClose);
-      closePopup(popupToClose);
-    }
-  }
-});
 
 profileAddButton.addEventListener('click', function () {
   popupTypeAddElementForm.reset();
