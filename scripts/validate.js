@@ -38,19 +38,17 @@ function editButtonState(inputList, buttonElement, inactiveButtonClass) {
   }
 }
 
-function setEventListeners(popupElement, obj) {
-  const inputList = Array.from(popupElement.querySelectorAll(obj.inputSelector));
-  const buttonElement = popupElement.querySelector(obj.submitButtonSelector);
+function setEventListeners(formElement, obj) {
+  const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
+  const buttonElement = formElement.querySelector(obj.submitButtonSelector);
 
-
-  editButtonState(inputList, buttonElement, obj.inactiveButtonClass);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       if (!inputElement.validity.valid) {
-        showInputError(popupElement, inputElement, inputElement.validationMessage, obj.inputErrorClass, obj.errorClass);
+        showInputError(formElement, inputElement, inputElement.validationMessage, obj.inputErrorClass, obj.errorClass);
       } else {
-        hideInputError(popupElement, inputElement, obj.inputErrorClass, obj.errorClass);
+        hideInputError(formElement, inputElement, obj.inputErrorClass, obj.errorClass);
       }
       editButtonState(inputList, buttonElement, obj.inactiveButtonClass);
     });
@@ -58,9 +56,9 @@ function setEventListeners(popupElement, obj) {
 }
 
 function enableValidation(obj) {
-  const popupList = Array.from(document.querySelectorAll(obj.formSelector));
-  popupList.forEach((popupElement) => {
-    setEventListeners(popupElement, obj);
+  const formList = Array.from(document.querySelectorAll(obj.formSelector));
+  formList.forEach((formElement) => {
+    setEventListeners(formElement, obj);
   });
 }
 
