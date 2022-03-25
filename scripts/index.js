@@ -26,7 +26,6 @@ const popupTypeOpenImage = document.querySelector('.popup_type_open-image');
 const popupTypeOpenImageCloseButton = popupTypeOpenImage.querySelector('.popup__button_type_close');
 
 const validateObj = {
-  formSelector: '.popup__block',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button_type_submit',
   inactiveButtonClass: 'popup__button_state_deactivated',
@@ -67,10 +66,11 @@ function createElement(item) {
   return elem.createCard();
 }
 
-function validatePopup(popupElement) {
-  const validator = new FormValidator(popupElement, validateObj);
-  validator.enableValidation();
-}
+const profileValidation = new FormValidator(popupTypeProfileForm, validateObj);
+const newCardValidation = new FormValidator(popupTypeAddElementForm, validateObj);
+profileValidation.enableValidation();
+newCardValidation.enableValidation();
+
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_is-opened');
@@ -82,24 +82,15 @@ function closePopup(popupElement) {
   document.removeEventListener('keydown', closePopupByEsc);
 }
 
-function hideErrorElementsIfVisible(popupElement) {
-  const popupInputList = Array.from(popupElement.querySelectorAll('.popup__input'));
-  popupInputList.forEach((inputElement) => {
-    const errorElement = popupElement.querySelector(`.${inputElement.id}-error`);
-    if (errorElement.classList.contains('popup__input-error_state_active')) {
-      errorElement.classList.remove('popup__input-error_state_active');
-      inputElement.classList.remove('popup__input_mode_error');
-      errorElement.textContent = '';
-    }
-  });
-}
+
 
 function openProfilePopup() {
   popupTypeProfileName.value = profileName.textContent;
   popupTypeProfileProfession.value = profileProfession.textContent;
-  hideErrorElementsIfVisible(popupTypeProfile);
+  profileValidation.resetInputErrors();
+  profileValidation.editButtonState();
   openPopup(popupTypeProfile);
-  validatePopup(popupTypeProfile);
+
 }
 
 
@@ -117,8 +108,7 @@ function addNewElement(evt) {
   evt.preventDefault();
   elements.prepend(createElement({ name: popupTypeAddElementName.value, link: popupTypeAddElementUrl.value }));
   popupTypeAddElementForm.reset();
-  popupTypeAddElementSubmitButton.classList.add('popup__button_state_deactivated');
-  popupTypeAddElementSubmitButton.setAttribute('disabled', true);
+  newCardValidation.editButtonState();
   closePopup(popupTypeAddElement);
 }
 
@@ -154,12 +144,13 @@ popupTypeOpenImageCloseButton.addEventListener('click', function () {
 
 profileAddButton.addEventListener('click', function () {
   openPopup(popupTypeAddElement);
-  validatePopup(popupTypeAddElement);
+
 });
 
 popupTypeAddElementCloseButton.addEventListener('click', function () {
   closePopup(popupTypeAddElement);
 });
+
 
 popupTypeProfileForm.addEventListener('submit', setNewProfileInfo);
 

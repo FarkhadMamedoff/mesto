@@ -10,10 +10,12 @@ export default class Card {
 
   createCard() {
     this._element = this._getTemplate();
-    const imageElement = this._element.querySelector('.element__image');
+    this._imageElement = this._element.querySelector('.element__image');
+    this._likeButton = this._element.querySelector('.element__button_type_like-default');
+    this._deleteButton = this._element.querySelector('.element__button_type_delete');
     this._element.querySelector('.element__title').textContent = this._nameValue;
-    imageElement.src = this._urlValue;
-    imageElement.alt = this._altValue;
+    this._imageElement.src = this._urlValue;
+    this._imageElement.alt = this._altValue;
 
     this._setEventListeners();
     return this._element;
@@ -25,22 +27,24 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__button_type_like-default').addEventListener('click', () => { this._handleLikeCard(); });
-    this._element.querySelector('.element__button_type_delete').addEventListener('click', () => { this._handleRemoveCard(); });
-    this._element.querySelector('.element__image').addEventListener('click', () => this._handleOpenImage());
+    this._likeButton.addEventListener('click', () => { this._handleLikeCard(); });
+    this._deleteButton.addEventListener('click', () => { this._handleRemoveCard(); });
+    this._imageElement.addEventListener('click', () => { this._handleOpenImage(); });
   }
 
   _handleLikeCard() {
-    this._element.querySelector('.element__button_type_like-default').classList.toggle('element__button_type_like-active');;
+    this._likeButton.classList.toggle('element__button_type_like-active');;
   }
 
   _handleRemoveCard() {
     this._element.remove();
+    this._element = null;
   }
 
   _handleOpenImage() {
-    this._popupTypeOpenImage.querySelector('.image-container__image').src = this._urlValue;
-    this._popupTypeOpenImage.querySelector('.image-container__image').alt = this._altValue;
+    const popupImage = this._popupTypeOpenImage.querySelector('.image-container__image');
+    popupImage.src = this._urlValue;
+    popupImage.alt = this._altValue;
     this._popupTypeOpenImage.querySelector('.image-container__title').textContent = this._nameValue;
     this._openImagePopup(this._popupTypeOpenImage);
   }

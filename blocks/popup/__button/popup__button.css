@@ -1,6 +1,5 @@
 .popup__button {
   display: block;
-  cursor: pointer;
   transition: 0.4s linear;
   margin: 0;
   border: 0;
