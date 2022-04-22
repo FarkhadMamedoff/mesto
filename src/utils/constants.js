@@ -1,14 +1,14 @@
 export const profileEditButton = document.querySelector('.profile__button_type_edit');
 export const profileAddButton = document.querySelector('.profile__button_type_add');
-export const profileName = document.querySelector('.profile__title');
-export const profileProfession = document.querySelector('.profile__subtitle');
+export const profileName = '.profile__title';
+export const profileProfession = '.profile__subtitle';
 
 export const elementTemplate = document.querySelector('#element-template');
-export const elements = document.querySelector('.elements');
+export const elements = '.elements';
 
-export const popupTypeProfile = document.querySelector('.popup_type_profile');
-export const popupTypeAddElement = document.querySelector('.popup_type_add-element');
-export const popupTypeOpenImage = document.querySelector('.popup_type_open-image');
+export const popupTypeProfile = '.popup_type_profile';
+export const popupTypeAddElement = '.popup_type_add-element';
+export const popupTypeOpenImage = '.popup_type_open-image';
 
 export const popupOpenedSelector = 'popup_is-opened';
 export const popupButtonCloseSelector = '.popup__button_type_close';

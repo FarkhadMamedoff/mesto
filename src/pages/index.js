@@ -30,7 +30,7 @@ const profilePopup = new PopupWithForm(popupTypeProfile, (valueData) => {
 });
 
 const addElementPopup = new PopupWithForm(popupTypeAddElement, (valueData) => {
-  elements.prepend(createElement({ name: valueData.popupNameInput, link:valueData.urlInput }));
+  defaultCardList.addItem(createElement({ name: valueData.popupNameInput, link:valueData.urlInput }));
   newCardValidation.editButtonState();
   addElementPopup.close();
 });
@@ -83,6 +83,7 @@ profileEditButton.addEventListener('click', openProfilePopup);
 
 profileAddButton.addEventListener('click', function () {
   newCardValidation.resetInputErrors();
+  newCardValidation.editButtonState();
   addElementPopup.open();
 });
 
