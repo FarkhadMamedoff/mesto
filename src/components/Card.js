@@ -41,7 +41,7 @@ export default class Card {
     if (this._cardOwnerId !== this._currentUserId) {
       this._deleteButton.remove();
     }
-    console.log(this._hasLike);
+
     if (this._hasLike) {
       this.like();
     }
