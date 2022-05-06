@@ -41,7 +41,7 @@ export default class Card {
     if (this._cardOwnerId !== this._currentUserId) {
       this._deleteButton.remove();
     }
-
+    console.log(this._hasLike);
     if (this._hasLike) {
       this.like();
     }
@@ -64,7 +64,11 @@ export default class Card {
   }
 
   _handleLikeButton() {
-    this._likeButton.classList.toggle(cardButtonLikeActiveSelector);
+    this._likeButton.classList.add(cardButtonLikeActiveSelector);
+  }
+
+  _handleDislikeButton() {
+    this._likeButton.classList.remove(cardButtonLikeActiveSelector);
   }
 
   remove() {
@@ -82,7 +86,7 @@ export default class Card {
   }
 
   dislike() {
-    this._handleLikeButton();
+    this._handleDislikeButton();
     this._hasLike = false;
   }
 
