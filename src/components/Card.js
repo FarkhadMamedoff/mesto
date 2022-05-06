@@ -43,7 +43,10 @@ export default class Card {
     }
 
     if (this._hasLike) {
-      this._handleLikeButton();
+      this.like();
+    }
+    else {
+      this.dislike();
     }
     this._setEventListeners();
     return this._element;
