@@ -85,7 +85,7 @@ const deleteCardPopup = new PopupWithDeleteCard(popupTypeDeleteCard, (card) => {
 
 const updateAvatarPopup = new PopupWithForm(popupTypeUpdateAvatar, (valueData) => {
   updateAvatarPopup.renderLoading(true);
-  api.updateUserAvatar({ avatar: valueData.urlInput })
+  api.updateUserAvatar({ avatar: valueData.avatarUrlInput })
     .then((res) => {
       userInfo.setUserAvatar(res.avatar);
     })
