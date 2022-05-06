@@ -180,7 +180,6 @@ function createElement(item) {
   return elem.createCard();
 }
 
-
 function openProfilePopup() {
   const userInfoContent = userInfo.getUserInfo();
   const profileForm = profilePopup.getForm();
