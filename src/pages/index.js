@@ -184,7 +184,7 @@ profileEditButton.addEventListener('click', openProfilePopup);
 profileAvatarEditButton.addEventListener('click', function () {
   updateAvatarValidation.resetInputErrors();
   updateAvatarValidation.editButtonState();
-  updateAvatarPopup.open();
+  updateAvatarPopup.close();
 });
 
 profileAddButton.addEventListener('click', function () {
