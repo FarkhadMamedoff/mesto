@@ -4,17 +4,28 @@ import {
   cardButtonLikeActiveSelector,
   cardButtonDeleteSelector,
   cardTitleSelector,
-  cardElementSelector
+  cardElementSelector,
+  cardLikesCounterSelector
 } from "../utils/constants.js";
 
 export default class Card {
-  constructor(data, handleCardClick, cardTemplate) {
+  constructor(data, currentUserId, handleCardClick, handleRemoveCard, hadleLikeCard, cardTemplate) {
     this._nameValue = data.name;
     this._urlValue = data.link;
     this._altValue = data.name;
+    this._cardId = data._id;
+    this._cardLikes = data.likes;
+    this._cardOwnerId = data.owner._id;
+    this._currentUserId = currentUserId;
     this._cardTemplate = cardTemplate;
     this._handleCardClick = handleCardClick;
+    this._handleRemoveCard = handleRemoveCard;
+    this._handleLikeCard = hadleLikeCard;
+    this._hasLike = this._cardLikes.some((user) => { return user._id === this._currentUserId; });
+  }
 
+  getCardId() {
+    return this._cardId;
   }
 
   createCard() {
@@ -22,10 +33,18 @@ export default class Card {
     this._imageElement = this._element.querySelector(cardImageSelector);
     this._likeButton = this._element.querySelector(cardButtonLikeSelector);
     this._deleteButton = this._element.querySelector(cardButtonDeleteSelector);
+    this._likeCounter = this._element.querySelector(cardLikesCounterSelector);
     this._element.querySelector(cardTitleSelector).textContent = this._nameValue;
     this._imageElement.src = this._urlValue;
     this._imageElement.alt = this._altValue;
+    this._likeCounter.textContent = this._cardLikes.length;
+    if (this._cardOwnerId !== this._currentUserId) {
+      this._deleteButton.remove();
+    }
 
+    if (this._hasLike) {
+      this._handleLikeButton();
+    }
     this._setEventListeners();
     return this._element;
   }
@@ -41,12 +60,32 @@ export default class Card {
     this._imageElement.addEventListener('click', () => { this._handleCardClick(); });
   }
 
-  _handleLikeCard() {
+  _handleLikeButton() {
     this._likeButton.classList.toggle(cardButtonLikeActiveSelector);
   }
 
-  _handleRemoveCard() {
+  remove() {
     this._element.remove();
     this._element = null;
   }
+
+  hasLike() {
+    return this._hasLike;
+  }
+
+  like() {
+    this._handleLikeButton();
+    this._hasLike = true;
+  }
+
+  dislike() {
+    this._handleLikeButton();
+    this._hasLike = false;
+  }
+
+  updateLikes(likes) {
+    this._cardLikes = likes;
+    this._likeCounter.textContent = this._cardLikes.length;
+  }
+
 }
