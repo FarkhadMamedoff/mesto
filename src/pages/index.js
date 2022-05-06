@@ -100,11 +100,9 @@ const updateAvatarPopup = new PopupWithForm(popupTypeUpdateAvatar, (valueData) =
 
 });
 
-
 const profileValidation = new FormValidator(profilePopup.getForm(), validateObj);
 const newCardValidation = new FormValidator(addElementPopup.getForm(), validateObj);
 const updateAvatarValidation = new FormValidator(updateAvatarPopup.getForm(), validateObj);;
-
 
 api.getBaseData()
   .then((res) => {
@@ -125,7 +123,6 @@ const defaultCardList = new Section({
   }
 }, elements);
 
-
 profilePopup.setEventListeners();
 addElementPopup.setEventListeners();
 imagePopup.setEventListeners();
@@ -135,7 +132,6 @@ updateAvatarPopup.setEventListeners();
 profileValidation.enableValidation();
 newCardValidation.enableValidation();
 updateAvatarValidation.enableValidation();
-
 
 
 function createElement(item) {
@@ -180,7 +176,7 @@ function openProfilePopup() {
   profileForm.elements.professionInput.value = userInfoContent.profileProfession;
   profileValidation.resetInputErrors();
   profileValidation.editButtonState();
-  profilePopup.open();
+  profilePopup.close();
 
 }
 
