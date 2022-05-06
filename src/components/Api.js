@@ -36,11 +36,15 @@ export default class Api {
       .then((res) => { return this._getResult(res) });
   }
 
-  getInitialCards() {
+  getBaseData() {
+    return Promise.all([this._getInitialCards(), this._getUserInfo()]);
+  }
+
+  _getInitialCards() {
     return this._getData('/cards');
   }
 
-  getUserInfo() {
+  _getUserInfo() {
     return this._getData('/users/me');
   }
 

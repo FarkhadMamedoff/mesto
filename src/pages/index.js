@@ -45,6 +45,8 @@ const profilePopup = new PopupWithForm(popupTypeProfile, (valueData) => {
   api.updateUserInfo({ name: valueData.popupProfileInput, about: valueData.professionInput })
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about);
+      profileValidation.editButtonState();
+      profilePopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -52,8 +54,6 @@ const profilePopup = new PopupWithForm(popupTypeProfile, (valueData) => {
     .finally(() => {
       profilePopup.renderLoading(false);
     });
-  profileValidation.editButtonState();
-  profilePopup.close();
 });
 
 const addElementPopup = new PopupWithForm(popupTypeAddElement, (valueData) => {
@@ -61,6 +61,8 @@ const addElementPopup = new PopupWithForm(popupTypeAddElement, (valueData) => {
   api.addNewCard({ name: valueData.popupNameInput, link: valueData.urlInput })
     .then((res) => {
       defaultCardList.addNewItem(createElement(res));
+      newCardValidation.editButtonState();
+      addElementPopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -68,19 +70,17 @@ const addElementPopup = new PopupWithForm(popupTypeAddElement, (valueData) => {
     .finally(() => {
       addElementPopup.renderLoading(false);
     });
-  newCardValidation.editButtonState();
-  addElementPopup.close();
 });
 
 const deleteCardPopup = new PopupWithDeleteCard(popupTypeDeleteCard, (card) => {
   api.deleteCard(card.getCardId())
     .then(() => {
       card.remove();
+      deleteCardPopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
-  deleteCardPopup.close();
 });
 
 const updateAvatarPopup = new PopupWithForm(popupTypeUpdateAvatar, (valueData) => {
@@ -88,6 +88,8 @@ const updateAvatarPopup = new PopupWithForm(popupTypeUpdateAvatar, (valueData) =
   api.updateUserAvatar({ avatar: valueData.avatarUrlInput })
     .then((res) => {
       userInfo.setUserAvatar(res.avatar);
+      updateAvatarValidation.editButtonState();
+      updateAvatarPopup.close();
     })
     .catch((err) => {
       console.log(err);
@@ -95,8 +97,7 @@ const updateAvatarPopup = new PopupWithForm(popupTypeUpdateAvatar, (valueData) =
     .finally(() => {
       updateAvatarPopup.renderLoading(false);
     });
-  updateAvatarValidation.editButtonState();
-  updateAvatarPopup.close();
+
 });
 
 
@@ -105,23 +106,15 @@ const newCardValidation = new FormValidator(addElementPopup.getForm(), validateO
 const updateAvatarValidation = new FormValidator(updateAvatarPopup.getForm(), validateObj);;
 
 
-api.getUserInfo()
+api.getBaseData()
   .then((res) => {
-    userInfo.setUserInfo(res.name, res.about);
-    userInfo.setUserAvatar(res.avatar);
-    userInfo.setCurrentUserId(res._id);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-
-api.getInitialCards()
-  .then((res) => {
-    defaultCardList.renderItems(res);
-  })
-  .catch((err) => {
-    console.log(err);
+    const [cards, user] = res;
+    userInfo.setUserInfo(user.name, user.about);
+    userInfo.setUserAvatar(user.avatar);
+    userInfo.setCurrentUserId(user._id);
+    defaultCardList.renderItems(cards);
+  }).catch((err) => {
+    console.error(err);
   });
 
 
