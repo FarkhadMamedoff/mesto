@@ -176,15 +176,14 @@ function openProfilePopup() {
   profileForm.elements.professionInput.value = userInfoContent.profileProfession;
   profileValidation.resetInputErrors();
   profileValidation.editButtonState();
-  profilePopup.close();
-
+  profilePopup.open();
 }
 
 profileEditButton.addEventListener('click', openProfilePopup);
 profileAvatarEditButton.addEventListener('click', function () {
   updateAvatarValidation.resetInputErrors();
   updateAvatarValidation.editButtonState();
-  updateAvatarPopup.close();
+  updateAvatarPopup.open();
 });
 
 profileAddButton.addEventListener('click', function () {
