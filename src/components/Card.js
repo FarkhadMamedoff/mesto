@@ -94,5 +94,4 @@ export default class Card {
     this._cardLikes = likes;
     this._likeCounter.textContent = this._cardLikes.length;
   }
-
 }
