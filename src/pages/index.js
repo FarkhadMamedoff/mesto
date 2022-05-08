@@ -60,7 +60,7 @@ const addElementPopup = new PopupWithForm(popupTypeAddElement, (valueData) => {
   addElementPopup.renderLoading(true);
   api.addNewCard({ name: valueData.popupNameInput, link: valueData.urlInput })
     .then((res) => {
-      defaultCardList.addNewItem(createElement(res));
+      defaultCardList.addItem(createElement(res));
       newCardValidation.editButtonState();
       addElementPopup.close();
     })
@@ -110,7 +110,7 @@ api.getBaseData()
     userInfo.setUserInfo(user.name, user.about);
     userInfo.setUserAvatar(user.avatar);
     userInfo.setCurrentUserId(user._id);
-    defaultCardList.renderItems(cards);
+    defaultCardList.renderItems(cards.reverse());
   }).catch((err) => {
     console.error(err);
   });
